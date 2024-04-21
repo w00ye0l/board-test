@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th=http://www.thymeleaf.org>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <h1>Board Detail</h1>
+
+        <form th:action="@{/board/{id}/edit(id=${board.id})}" th:object="${board}" method="post">
+            <p id="id" th:text="${id}"></p>
+
+            <label for="title">title</label>
+            <input id="title" name="title" th:field="*{title}" />
+
+            <label for="content">content</label>
+            <input id="content" name="content" th:field="*{content}" />
+
+            <button type="submit">수정</button>
+            <a th:href="@{/board/{id}/delete(id=${board.id})}">삭제</a>
+        </form>
+
+    </div>
+</body>
+</html>
