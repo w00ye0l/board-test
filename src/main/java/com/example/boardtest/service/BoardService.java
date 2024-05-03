@@ -2,7 +2,9 @@ package com.example.boardtest.service;
 
 import com.example.boardtest.dto.BoardDto;
 import com.example.boardtest.entity.Board;
+import com.example.boardtest.entity.User;
 import com.example.boardtest.repository.BoardRepository;
+import com.example.boardtest.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,16 +13,22 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
 
-    public BoardService(BoardRepository boardRepository) {
+    public BoardService(BoardRepository boardRepository, UserRepository userRepository) {
         this.boardRepository = boardRepository;
+        this.userRepository = userRepository;
     }
 
-    public void saveService(BoardDto boardDto) {
+    public void saveService(BoardDto boardDto, String username) {
         System.out.println("service run");
         Board board = new Board();
         board.setTitle(boardDto.getTitle());
         board.setContent(boardDto.getContent());
+
+        User user = userRepository.findById(username).orElse(null);
+        board.setUser(user);
+
         boardRepository.save(board);
     }
 
