@@ -16,6 +16,7 @@
     </div>
     <div th:if="${username != null and username != 'fail'}">
         <button th:onclick="|location.href='@{/board}'|">작성하기</button>
+        <button th:onclick="|location.href='@{/out}'|">로그아웃</button>
     </div>
 
     <table>

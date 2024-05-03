@@ -49,4 +49,11 @@ public class UserController {
         // 로그인에 성공하면 메인 페이지로 리다이렉트
         return "redirect:/";
     }
+
+    @GetMapping("/out")
+    public String logout(HttpSession httpSession) {
+        httpSession.removeAttribute("username");
+
+        return "redirect:/";
+    }
 }
