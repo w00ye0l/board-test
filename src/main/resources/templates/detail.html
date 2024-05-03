@@ -17,8 +17,13 @@
             <label for="content">content</label>
             <input id="content" name="content" th:field="*{content}" />
 
-            <button type="submit">수정</button>
-            <a th:href="@{/board/{id}/delete(id=${board.id})}">삭제</a>
+            <label for="username">username</label>
+            <input id="username" name="username" th:field="*{user.username}" disabled>
+
+            <div th:if="${loginUsername == board.user.username}">
+                <button type="submit">수정</button>
+                <button th:onclick="|location.href='@{/board/{id}/delete(id=${board.id})}'|">삭제</button>
+            </div>
         </form>
 
     </div>

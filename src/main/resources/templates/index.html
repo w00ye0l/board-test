@@ -6,9 +6,17 @@
 </head>
 <body>
 <div>
-    <h1>Index</h1>
+    <h1>메인 페이지</h1>
 
-    <a href="/board">작성하기</a>
+    <h2 th:if="${username != null and username != 'fail'}" th:text="|${username}님 안녕하세요.|"></h2>
+
+    <div th:if="${username == null or username == 'fail'}">
+        <button th:onclick="|location.href='@{/signup}'|">회원가입</button>
+        <button th:onclick="|location.href='@{/login}'|">로그인</button>
+    </div>
+    <div th:if="${username != null and username != 'fail'}">
+        <button th:onclick="|location.href='@{/board}'|">작성하기</button>
+    </div>
 
     <table>
         <tr>

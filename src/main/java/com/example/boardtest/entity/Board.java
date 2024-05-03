@@ -1,9 +1,6 @@
 package com.example.boardtest.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,4 +14,8 @@ public class Board {
     private Long id;
     private String title;
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "username")
+    private User user;
 }
