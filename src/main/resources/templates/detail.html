@@ -26,6 +26,26 @@
             </div>
         </form>
 
+        <hr>
+
+        <h3>댓글</h3>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>content</th>
+                <th>username</th>
+            </tr>
+            <tr th:each="comment : ${commentList}">
+                <td th:text="${comment.id}"></td>
+                <td th:text="${comment.content}"></td>
+                <td th:text="${comment.user.username}"></td>
+            </tr>
+        </table>
+
+        <form th:action="@{/board/{id}/comment(id=${board.id})}" method="post">
+            <input type="text" name="content">
+            <button type="submit">댓글 작성</button>
+        </form>
     </div>
 </body>
 </html>

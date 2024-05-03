@@ -2,8 +2,9 @@ package com.example.boardtest.controller;
 
 import com.example.boardtest.dto.BoardDto;
 import com.example.boardtest.entity.Board;
-import com.example.boardtest.repository.BoardRepository;
+import com.example.boardtest.entity.Comment;
 import com.example.boardtest.service.BoardService;
+import com.example.boardtest.service.CommentService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +18,11 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
+    private final CommentService commentService;
 
-    public BoardController(BoardService boardService) {
+    public BoardController(BoardService boardService, CommentService commentService) {
         this.boardService = boardService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/")
@@ -57,6 +60,7 @@ public class BoardController {
     @GetMapping("/board/{id}")
     public String board(@PathVariable Long id, Model model, HttpSession httpSession) {
         Board selectedBoard = boardService.findBoardById(id);
+        List<Comment> commentList = commentService.getCommentByBoardId(id);
 
         if (selectedBoard == null) {
             return "redirect:/";
@@ -67,6 +71,7 @@ public class BoardController {
         }
 
         model.addAttribute("board", selectedBoard);
+        model.addAttribute("commentList", commentList);
 
         return "detail";
     }
